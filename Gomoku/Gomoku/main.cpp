@@ -1,18 +1,38 @@
 #include <iostream>
 #include <cstdlib>
 #include <Windows.h>
+#include <ctime>
 
 #include "game_rule.h"
 #include "game.h"
+
 
 using namespace std;
 
 int main(int argc, char** argv) {
     int boardSize;  // 오목판 크기
     Game* game;     // 게임 핸들러
+    clock_t curTime, oldTime;
 
     game = new Game(19);
     game->printBoard();
+
+    while (true) {
+        oldTime = clock();
+        game->update();
+        game->render();
+
+        // 화면 업데이트 시간 조정
+        while (true) {
+            curTime = clock();
+            if (curTime - oldTime > 33) {
+                break;
+            }
+        }
+
+    }
+
+    delete game;
     //while (true) {
     //    game->getKeyInput();
     //}

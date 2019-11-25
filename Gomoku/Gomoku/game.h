@@ -12,6 +12,7 @@
 #define RIGHT 77
 #define UP 72
 #define DOWN 80
+#define SPACE 32
 
 const unsigned char alphabets[26] = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
@@ -25,12 +26,32 @@ private:
     int** board;        // 15x15일 수도 있고 19x19일 수도 있음
     int size;           // 오목판의 사이즈
 
+    // 현재 누구 턴인지 저장 (시작은 흑돌)
+    int turn;
+
+    // 현재 커서의 위치
+    int cursorX;
+    int cursorY;
+
+    // 커서의 한계 범위 (보드 내에서만 움직일 수 있어야 함)
+    int yBoundTop; // 위쪽 한계
+    int yBoundBtm; // 아래쪽 한계
+    int xBoundLft; // 왼쪽 한계
+    int xBoundRgt; // 오른쪽 한계
+    
+    // 커서와 1:1 대응하는 board 위의 커서의 위치
+    int selectedBoardX;
+    int selectedBoardY;
+
 public:
     // 게임 기본 세팅
     Game(int size);
 
     // 동적 할당된 오목판 메모리 해제
     ~Game();
+
+    // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치
+    void placeStone(int x, int y);
 
     // whichStone의 값에 따라 오목판에 흑돌/백돌 배치
     void placeStone(int x, int y, int whichStone);
@@ -41,14 +62,20 @@ public:
     // x, y에 해당하는 오목판 기호 한 칸 출력
     void printSymbol(int x, int y);
 
+    // 키보드 입력을 처리함 (UP, DOWN, LEFT, RIGHT, ...)
+    void handleKeyInput();
+
     // 키보드 입력을 받음
     int getKeyInput();
 
     // 해당 수를 둘 수 있는지 체크 (상속하는 클래스에서 정의)
     //virtual boolean isPlaceable() = 0;
 
-    // 화면 업데이트 및 게임 진행 
+    // 게임 정보 갱신 
     void update();
+
+    // 화면 업데이트
+    void render();
 
     // 아마 성민이가 만들 함수 - 메뉴 화면
     void printMenuScreen();
