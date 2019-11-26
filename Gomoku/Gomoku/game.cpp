@@ -97,6 +97,12 @@ void Game::placeStone(int x, int y, int whichStone) {
     }
 }
 
+bool Game::isPlaceable(int x, int y) {
+    // 룰을 확인한다
+    // 룰에 따라서 반칙수인지, 둘 수 없는 수 인지 확인 후 true/false 반환
+    return true;
+}
+
 // 임시함수: 오목판 출력 (나중에 다듬어서 쓸 것)
 void Game::printBoard() {
     for (int y = 0; y < size + 2; y++) {
@@ -197,8 +203,10 @@ void Game::handleKeyInput() {
             }
         }
         else if (keyInput == SPACE) {
-            // 선택된 좌표에 흑/백돌을 놓음
-            placeStone(selectedBoardX, selectedBoardY);
+            // 둘 수 있는지 확인 후, 선택된 좌표에 흑/백돌을 놓음
+            if (isPlaceable(selectedBoardX, selectedBoardY)) {
+                placeStone(selectedBoardX, selectedBoardY);
+            }
         }
     }
 }

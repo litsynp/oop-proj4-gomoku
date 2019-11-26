@@ -50,17 +50,22 @@ public:
     // 동적 할당된 오목판 메모리 해제
     ~Game();
 
+    // 게임 정보 갱신 
+    void update();
+
+    // 화면 업데이트
+    void render();
+
+
     // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치
     void placeStone(int x, int y);
 
     // whichStone의 값에 따라 오목판에 흑돌/백돌 배치
     void placeStone(int x, int y, int whichStone);
 
-    // 임시함수: 오목판 출력
-    void printBoard();
+    // board의 x, y에 그 수를 둘 수 있는지 확인한다
+    bool isPlaceable(int x, int y);
 
-    // x, y에 해당하는 오목판 기호 한 칸 출력
-    void printSymbol(int x, int y);
 
     // 키보드 입력을 처리함 (UP, DOWN, LEFT, RIGHT, ...)
     void handleKeyInput();
@@ -68,14 +73,13 @@ public:
     // 키보드 입력을 받음
     int getKeyInput();
 
-    // 해당 수를 둘 수 있는지 체크 (상속하는 클래스에서 정의)
-    //virtual boolean isPlaceable() = 0;
 
-    // 게임 정보 갱신 
-    void update();
+    // 임시함수: 오목판 출력
+    void printBoard();
 
-    // 화면 업데이트
-    void render();
+    // x, y에 해당하는 오목판 기호 한 칸 출력
+    void printSymbol(int x, int y);
+
 
     // 아마 성민이가 만들 함수 - 메뉴 화면
     void printMenuScreen();

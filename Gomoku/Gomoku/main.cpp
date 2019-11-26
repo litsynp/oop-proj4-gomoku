@@ -10,11 +10,11 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    int boardSize;  // 오목판 크기
+    int boardSize = 19;  // 오목판 크기
     Game* game;     // 게임 핸들러
     clock_t curTime, oldTime;
 
-    game = new Game(19);
+    game = new Game(boardSize);
     game->printBoard();
 
     while (true) {
