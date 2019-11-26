@@ -65,9 +65,7 @@ Game::~Game() {
 }
 
 void Game::update() {
-    if (_kbhit()) {
-        handleKeyInput();
-    }
+    handleKeyInput();
 
 }
 
@@ -156,48 +154,52 @@ void Game::printSymbol(int x, int y) {
 }
 
 void Game::handleKeyInput() {
-
-    int keyInput = getKeyInput();
+    int keyInput;
     int vx = 2;
     int vy = 1;
 
     // 키 입력을 받았을 경우
     // 커서의 위치와 보드 위 선택된 좌표를 업데이트한다
     // 커서가 움직이면 선택된 보드 좌표도 움직여야 함
-    if (keyInput == UP) {
-        if (cursorY - vy >= yBoundTop) {
-            selectedBoardY -= 1;
-            cursorY -= vy;
-            gotoxy(cursorX, cursorY);
-            std::cout << "◎";
+    if (_kbhit()) {
+        keyInput = getKeyInput();
+
+        if (keyInput == UP) {
+            if (cursorY - vy >= yBoundTop) {
+                selectedBoardY -= 1;
+                cursorY -= vy;
+                gotoxy(cursorX, cursorY);
+                std::cout << "◎";
+            }
         }
-    }
-    else if (keyInput == DOWN) {
-        if (cursorY + vy <= yBoundBtm) {
-            selectedBoardY += 1;
-            cursorY += vy;
-            gotoxy(cursorX, cursorY);
-            std::cout << "◎";
+        else if (keyInput == DOWN) {
+            if (cursorY + vy <= yBoundBtm) {
+                selectedBoardY += 1;
+                cursorY += vy;
+                gotoxy(cursorX, cursorY);
+                std::cout << "◎";
+            }
         }
-    }
-    else if (keyInput == LEFT) {
-        if (cursorX - vx >= xBoundLft) {
-            selectedBoardX -= 1;
-            cursorX -= vx;
-            gotoxy(cursorX, cursorY);
-            std::cout << "◎";
+        else if (keyInput == LEFT) {
+            if (cursorX - vx >= xBoundLft) {
+                selectedBoardX -= 1;
+                cursorX -= vx;
+                gotoxy(cursorX, cursorY);
+                std::cout << "◎";
+            }
         }
-    }
-    else if (keyInput == RIGHT) {
-        if (cursorX + vx <= xBoundRgt) {
-            selectedBoardX += 1;
-            cursorX += vx;
-            gotoxy(cursorX, cursorY);
-            std::cout << "◎";
+        else if (keyInput == RIGHT) {
+            if (cursorX + vx <= xBoundRgt) {
+                selectedBoardX += 1;
+                cursorX += vx;
+                gotoxy(cursorX, cursorY);
+                std::cout << "◎";
+            }
         }
-    }
-    else if (keyInput == SPACE) {
-        placeStone(selectedBoardX, selectedBoardY);
+        else if (keyInput == SPACE) {
+            // 선택된 좌표에 흑/백돌을 놓음
+            placeStone(selectedBoardX, selectedBoardY);
+        }
     }
 }
 
