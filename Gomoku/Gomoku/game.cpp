@@ -65,7 +65,9 @@ Game::~Game() {
 }
 
 void Game::update() {
-    handleKeyInput();
+    if (_kbhit()) {
+        handleKeyInput();
+    }
 
 }
 
