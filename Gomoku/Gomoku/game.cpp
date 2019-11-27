@@ -11,7 +11,6 @@
 #include <conio.h>
 #include <Windows.h>
 
-
 Game::Game(int size) {
     // 콘솔창 설정
     system("title 오목 게임");              // 콘솔창 이름 설정

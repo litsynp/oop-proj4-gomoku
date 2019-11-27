@@ -9,7 +9,7 @@
 #include <ctime>
 #include <iostream>
 
-const char* shortcutsMsg[] = {
+const std::string shortcutsMsg[] = {
     "스페이스바 : 착  수",
     "방  향  키 : 이  동",
     "    U      : Undo  ",
@@ -17,7 +17,7 @@ const char* shortcutsMsg[] = {
     "Delete Key : Pass  "
 };
 
-const char* turnMsg[] = {
+const std::string turnMsg[] = {
     "BLACK TURN",
     "WHITE TURN",
     "          ",
@@ -32,7 +32,7 @@ void ConsoleHandler::showRuleMenu() {
     system("mode con: cols=58 lines=32"); // 콘솔 크기 설정
     hideCursorOnConsole();
 
-    const char* ruleMenus[] = {
+    const std::string ruleMenus[] = {
         "O M O K  G A M E",
         "고모쿠(GOMOKU) 룰",
         "일  반(NORMAL) 룰",
@@ -40,7 +40,7 @@ void ConsoleHandler::showRuleMenu() {
         "그   만   하   기"
     };
 
-    const char* menuSelections[] = {
+    const std::string menuSelections[] = {
         "    ",
         "                         ",
         "  1. ",
@@ -52,7 +52,7 @@ void ConsoleHandler::showRuleMenu() {
         "  4. "
     };
 
-    int x = strlen(menuSelections[1]);
+    int x = menuSelections[1].length();
     int y = sizeof(menuSelections) / sizeof(menuSelections[0]);
 
     x = 29 - x / 2;
@@ -61,8 +61,8 @@ void ConsoleHandler::showRuleMenu() {
     system("cls");
     for (int i = 0; i < sizeof(menuSelections) / sizeof(menuSelections[0]); i++) {
         gotoxy(x, y + i);
-        if (i & 1) printf("%s", menuSelections[i]);
-        else printf("%s%s", menuSelections[i], ruleMenus[i / 2]);
+        if (i & 1) std::cout << menuSelections[i];
+        else       std::cout << menuSelections[i] << ruleMenus[i / 2];
     }
 }
 
@@ -86,14 +86,14 @@ void ConsoleHandler::showBoardSizeMenu() {
 
     int x, y;
 
-    const char* sizeMenus[] = {
+    const std::string sizeMenus[] = {
         "  SIZE     SELECT",
         "15      *      15",
         "19      *      19",
         "뒤   로   가   기"
     };
 
-    const char* menuSelections[] = {
+    const std::string menuSelections[] = {
         "    ",
         "                         ",
         "  1. ",
@@ -103,7 +103,7 @@ void ConsoleHandler::showBoardSizeMenu() {
         "  3. "
     };
 
-    x = strlen(menuSelections[1]);
+    x = menuSelections[1].length();
     y = sizeof(menuSelections) / sizeof(menuSelections[0]);
 
     x = 29 - x / 2;
@@ -112,8 +112,8 @@ void ConsoleHandler::showBoardSizeMenu() {
     system("cls");
     for (int i = 0; i < sizeof(menuSelections) / sizeof(menuSelections[0]); i++) {
         gotoxy(x, y + i);
-        if (i & 1) printf("%s", menuSelections[i]);
-        else printf("%s%s", menuSelections[i], sizeMenus[i / 2]);
+        if (i & 1) std::cout << menuSelections[i];
+        else       std::cout << menuSelections[i] << sizeMenus[i / 2];
     }
 }
 
@@ -162,7 +162,7 @@ void ConsoleHandler::printSymbol(Symbols symbolOnBoardXY, int size, int x, int y
 void ConsoleHandler::displayShortcuts(int size) {
     for (int i = 0; i < sizeof(shortcutsMsg) / sizeof(shortcutsMsg[0]); i++) {
         gotoxy(size - 1 + (19 - size), size + (27 - size) / 2 + 3 + i);
-        printf(shortcutsMsg[i]);
+        std::cout << shortcutsMsg[i];
     }
 }
 
@@ -174,7 +174,7 @@ void ConsoleHandler::displayRemainingTime(clock_t time) {
 }
 
 void ConsoleHandler::showMsg(int whichMsg) {
-    printf("%s", turnMsg[whichMsg]);
+    std::cout << turnMsg[whichMsg];
 }
 
 void ConsoleHandler::setConsoleColor(int foreground, int background) {
