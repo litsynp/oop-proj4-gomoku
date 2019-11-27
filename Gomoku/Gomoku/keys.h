@@ -1,7 +1,7 @@
 #ifndef _KEYS_H_
 #define _KEYS_H_
 
-// getch()ë¡œ ì…ë ¥ë°›ì€ í‚¤ê°’ ì •ì˜
+// getch()·Î ÀÔ·Â¹ŞÀº Å°°ª Á¤ÀÇ
 enum Keys {
     ESC = 27,
     UP = 72,
