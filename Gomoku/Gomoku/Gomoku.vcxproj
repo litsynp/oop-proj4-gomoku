@@ -19,12 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="console_handler.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console_handler.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_rule.h" />
+    <ClInclude Include="gomoku_game.h" />
+    <ClInclude Include="keys.h" />
+    <ClInclude Include="normal_game.h" />
+    <ClInclude Include="renju_game.h" />
+    <ClInclude Include="symbols.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
