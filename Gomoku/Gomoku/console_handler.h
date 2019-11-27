@@ -33,6 +33,9 @@ class ConsoleHandler {
 private:
 
 public:
+    // 사전에 정의된 통일한 콘솔창 크기 설정
+    static void setPredefinedConsoleSize();
+
     // 어떤 룰을 사용할지를 고르는 메뉴 표시
     static void showRuleMenu();
 

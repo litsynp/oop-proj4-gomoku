@@ -14,7 +14,7 @@
 Game::Game(int size) {
     // 콘솔창 설정
     system("title 오목 게임");              // 콘솔창 이름 설정
-    system("mode con: cols=58 lines=32");   // 콘솔 크기 설정
+    ConsoleHandler::setPredefinedConsoleSize();
     ConsoleHandler::hideCursorOnConsole();  // 콘솔 커서 깜빡임 제거
 
     // 커서 이동 한계 설정

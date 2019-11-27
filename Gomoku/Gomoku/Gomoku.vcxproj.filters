@@ -13,33 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\games">
+      <UniqueIdentifier>{8d5eff08-437e-4e30-b89a-0dea9c59e3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\enums">
+      <UniqueIdentifier>{d5c4a4bc-4f62-4f56-9e4f-020faee086a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\handlers">
+      <UniqueIdentifier>{a6cd0c9e-9ba4-46b1-98fc-cdcade688d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\games">
+      <UniqueIdentifier>{29af015e-149a-4279-9591-d0f2bb24354d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\handlers">
+      <UniqueIdentifier>{329416ff-f682-4711-93d9-35dc2fd07807}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>소스 파일\games</Filter>
+    </ClCompile>
     <ClCompile Include="console_handler.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="game_rule.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="console_handler.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="symbols.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\games</Filter>
     </ClInclude>
     <ClInclude Include="keys.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="symbols.h">
+      <Filter>헤더 파일\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="game_rule.h">
+      <Filter>헤더 파일\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="gomoku_game.h">
+      <Filter>헤더 파일\games</Filter>
+    </ClInclude>
+    <ClInclude Include="normal_game.h">
+      <Filter>헤더 파일\games</Filter>
+    </ClInclude>
+    <ClInclude Include="renju_game.h">
+      <Filter>헤더 파일\games</Filter>
+    </ClInclude>
+    <ClInclude Include="console_handler.h">
+      <Filter>헤더 파일\handlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

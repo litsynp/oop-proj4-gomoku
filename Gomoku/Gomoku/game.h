@@ -4,6 +4,7 @@
 #define TIME_LIMIT 30000    // 턴당 시간제한
 #include "console_handler.h"
 
+// 게임 포괄적인 부분을 담당하는 추상클래스
 class Game {
 private:
     // 동적 할당을 통한 오목판 초기화
@@ -58,7 +59,8 @@ public:
     void placeStone(int x, int y, int whichStone);
 
     // board의 x, y에 그 수를 둘 수 있는지 확인한다
-    bool isPlaceable(int x, int y);
+    // 룰에 따라 달라지므로 상속 함수에서 정의해야 함
+    virtual bool isPlaceable(int x, int y) = 0;
 
 
     /*************************************

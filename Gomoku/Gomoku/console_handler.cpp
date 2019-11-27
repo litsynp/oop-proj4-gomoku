@@ -26,10 +26,14 @@ const std::string turnMsg[] = {
     "   DRAW   "
 };
 
+void ConsoleHandler::setPredefinedConsoleSize() {
+    system("mode con: cols=58 lines=32"); // 콘솔 크기 설정
+}
+
 void ConsoleHandler::showRuleMenu() {
     // 콘솔창 설정
     system("title 오목 게임");// 콘솔창 이름 설정
-    system("mode con: cols=58 lines=32"); // 콘솔 크기 설정
+    setPredefinedConsoleSize();
     hideCursorOnConsole();
 
     const std::string ruleMenus[] = {
@@ -81,7 +85,7 @@ int ConsoleHandler::getRuleMenuInput() {
 void ConsoleHandler::showBoardSizeMenu() {
     // 콘솔창 설정
     system("title 오목 게임");// 콘솔창 이름 설정
-    system("mode con: cols=58 lines=32"); // 콘솔 크기 설정
+    setPredefinedConsoleSize();
     hideCursorOnConsole();
 
     int x, y;
