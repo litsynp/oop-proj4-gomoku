@@ -14,9 +14,6 @@ private:
     // 현재 누구 턴인지 저장 (시작은 흑돌)
     Symbols turn;
 
-    // TODO 룰검사를 위한 임시보드
-    // Symbols** tBoard;
-
     // 현재 커서의 위치
     int cursorX;
     int cursorY;
@@ -48,6 +45,8 @@ public:
     // 화면 업데이트
     void render();
 
+    // getter for turn member variable
+    Symbols getTurn();
 
     /*************************************
      *              착수 관련
@@ -82,13 +81,14 @@ public:
     /*************************************
      *            게임 룰 관련
      *************************************/
-    void GetDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기
+    bool IsExist(int x, int y);							// 돌을 놓기전에 둘수 있는지 우선 판별
+    void GetDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기하고 그 방향에따른 좌표 반환
     int GetStoneCount(int x, int y, int nDir);          // 정해진 방향으로 있는 돌의 갯수 카운트
-    bool IsEmpty(int& x, int& y, int nDir);             // 착수 지점이 비어있는지 확인
+    bool IsEmpty(int& x, int& y, int nDir);             // 임시로 둔 돌의 방향에 따라 그 끝이 비어있는지 확인하고 그에따른 좌표 반환
 
-    bool IsFiveForFour(int x, int y, int nDir);         // 주어진 방향으로 돌이 5개가 되는지 확인 
-    bool IsFive(int x, int y);                          // 승리조건 판별
-    bool IsSix(int x, int y);                           // 장목인 6개이상인 경우
+    bool IsFiveForFour(int x, int y, int nDir);         // 열린4인지 체크하기 위해 주어진 방향으로 돌이 5개가 되는지 확인 
+    bool IsFive(int x, int y);                          // 승리조건식
+    bool IsSix(int x, int y);                           // 장목인 6개이상의 돌이 놓인 경우
 
     bool IsFour(int x, int y, int nDir);                // 돌의 갯수가 4인 경우
     int IsOpenFour(int x, int y, int nDir);             // 양쪽으로 열린 4의 경우
@@ -96,9 +96,6 @@ public:
 
     bool IsOpenThree(int x, int y, int nDir);           // 양쪽으로 열린 3의 경우
     bool IsDoubleThree(int x, int y);                   // 금수인 3-3을 확인
-    bool IsForbidden(int x, int y) { return false; };   // 모든 금수 조건을 검사
-
 };
-
 
 #endif
