@@ -173,13 +173,8 @@ void Game::placeStone(int x, int y) {
     turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
 }
 
-void Game::placeStone(int x, int y, int whichStone) {
-    if (whichStone == BLACK_STONE) {
-        board[y][x] = BLACK_STONE;
-    }
-    else {
-        board[y][x] = WHITE_STONE;
-    }
+void Game::setStone(int x, int y, Symbols whichStone) {
+    board[y][x] = whichStone;
 }
 
 bool Game::isPlaceable(int x, int y) {
@@ -305,7 +300,7 @@ int Game::GetStoneCount(int x, int y, int nDir) {
     x = tx + dx;
     y = ty + dy;
     for (; board[y][x] == turn; x += dx, y += dy) count++;
-    placeStone(x, y, EMPTY);
+    setStone(x, y, EMPTY);
     return count;
 }
 
@@ -342,12 +337,12 @@ bool Game::IsFour(int x, int y, int nDir) {
         ty = y;
         if (IsEmpty(tx, ty, nDir + i)) {
             if (IsFiveForFour(tx, ty, nDir + i)) {
-                placeStone(x, y, EMPTY);
+                setStone(x, y, EMPTY);
                 return true;
             }
         }
     }
-    placeStone(x, y, EMPTY);
+    setStone(x, y, EMPTY);
     return false;
 }
 
@@ -363,7 +358,7 @@ int Game::IsOpenFour(int x, int y, int nDir) {
         if (IsEmpty(tx, ty, nDir + i))
             if (IsFiveForFour(tx, ty, nDir + i)) sum++;
     }
-    placeStone(x, y, EMPTY);
+    setStone(x, y, EMPTY);
     // 특이 케이스로 열린 4일때 한줄에서 44가 성립할때의 예외 처리
     if (sum == 2) {
         if (GetStoneCount(x, y, nDir) == 4) sum = 1;
@@ -393,12 +388,12 @@ bool Game::IsOpenThree(int x, int y, int nDir) {
         ty = y;
         if (IsEmpty(tx, ty, nDir += i)) {
             if ((IsOpenFour(tx, ty, nDir) == 1)) {
-                placeStone(x, y, EMPTY);
+                setStone(x, y, EMPTY);
                 return true;
             }
         }
     }
-    placeStone(x, y, EMPTY);
+    setStone(x, y, EMPTY);
     return false;
 }
 

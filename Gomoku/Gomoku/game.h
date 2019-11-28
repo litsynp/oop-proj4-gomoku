@@ -52,11 +52,11 @@ public:
     /*************************************
      *              착수 관련
      *************************************/
-     // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치
+     // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치 후 턴 변경
     void placeStone(int x, int y);
 
-    // whichStone의 값에 따라 오목판에 흑돌/백돌 배치
-    void placeStone(int x, int y, int whichStone);
+    // 턴 변경 없이 whichStone의 값에 따라 오목판에 흑돌/백돌 배치
+    void setStone(int x, int y, Symbols whichStone);
 
     // board의 x, y에 그 수를 둘 수 있는지 확인한다
     // 룰에 따라 달라지므로 상속 함수에서 정의해야 함

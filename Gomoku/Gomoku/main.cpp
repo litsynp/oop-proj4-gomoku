@@ -12,30 +12,30 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    Game* game;                     // ê²Œìž„ í•¸ë“¤ëŸ¬
+    Game* game;                     // °ÔÀÓ ÇÚµé·¯
     bool exitGame = false;
 
     while (exitGame == false) {
-        int boardSize;             // ì˜¤ëª©íŒ í¬ê¸°
-        int selectedRuleInMenu;    // ì„ íƒí•œ ë£°
+        int boardSize;             // ¿À¸ñÆÇ Å©±â
+        int selectedRuleInMenu;    // ¼±ÅÃÇÑ ·ê
 
-        // ë©”ë‰´ì—ì„œ ì„ íƒì§€ë¥¼ ë°›ìŒ
-        // 1. ë£° ì¢…ë¥˜ ì„ íƒ
+        // ¸Þ´º¿¡¼­ ¼±ÅÃÁö¸¦ ¹ÞÀ½
+        // 1. ·ê Á¾·ù ¼±ÅÃ
         while (true) {
             ConsoleHandler::showRuleMenu();
             selectedRuleInMenu = ConsoleHandler::getRuleMenuInput();
             if (selectedRuleInMenu == Keys::ESC) {
-                // ESC ë˜ëŠ” ë‚˜ê°€ê¸°ë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
-                // TODO ì¢…ë£Œ ë©”ì‹œì§€ ì¶œë ¥
+                // ESC ¶Ç´Â ³ª°¡±â¸¦ ¼±ÅÃÇßÀ» °æ¿ì
+                // TODO Á¾·á ¸Þ½ÃÁö Ãâ·Â
                 exitGame = true;
                 break;
             }
 
-            // 2. ë³´ë“œ ì‚¬ì´ì¦ˆ ì„ íƒ
+            // 2. º¸µå »çÀÌÁî ¼±ÅÃ
             ConsoleHandler::showBoardSizeMenu();
             int selectedBoardSizeInMenu = ConsoleHandler::getBoardSizeMenuInput();
 
-            // ì„ íƒëœ ì˜¤ëª©íŒ í¬ê¸° ì„¤ì •
+            // ¼±ÅÃµÈ ¿À¸ñÆÇ Å©±â ¼³Á¤
             if (selectedBoardSizeInMenu == 1) {
                 boardSize = 15;
                 break;
@@ -45,12 +45,12 @@ int main(int argc, char** argv) {
                 break;
             }
             else {
-                // ESC ë˜ëŠ” ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°ë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
+                // ESC ¶Ç´Â ¸Þ´º·Î µ¹¾Æ°¡±â¸¦ ¼±ÅÃÇßÀ» °æ¿ì
                 continue;
             }
         }
 
-        // ë£° ì„¤ì • í™”ë©´ì—ì„œ ESC ë˜ëŠ” ë‚˜ê°€ê¸°ë¥¼ ì„ íƒí–ˆì„ ê²½ìš° ê²Œìž„ì„ ë°”ë¡œ ì¢…ë£Œ
+        // ·ê ¼³Á¤ È­¸é¿¡¼­ ESC ¶Ç´Â ³ª°¡±â¸¦ ¼±ÅÃÇßÀ» °æ¿ì °ÔÀÓÀ» ¹Ù·Î Á¾·á
         if (exitGame == true) {
             break;
         }
@@ -60,19 +60,19 @@ int main(int argc, char** argv) {
             game = new NormalGame(boardSize);
             break;
         case GameRule::GOMOKU:
-            // ì„ íƒëœ ë£°ì´ ì˜¤ëª©ë£°ì¼ ê²½ìš°
+            // ¼±ÅÃµÈ ·êÀÌ ¿À¸ñ·êÀÏ °æ¿ì
             game = new GomokuGame(boardSize);
             break;
         default:
-            // ì„ íƒëœ ë£°ì´ ë Œì£¼ë£°ì¼ ê²½ìš°
+            // ¼±ÅÃµÈ ·êÀÌ ·»ÁÖ·êÀÏ °æ¿ì
             game = new RenjuGame(boardSize);
         }
 
-        // ê²Œìž„ ì§„í–‰
+        // °ÔÀÓ ÁøÇà
         while (true) {
             game->update();
             game->render();
-            // TODO ê²Œìž„ ì¤‘ ESC ëˆ„ë¥´ë©´ ë©”ë‰´ë¡œ ë‚˜ê°ˆ ìˆ˜ ìžˆê²Œ í•˜ê¸°
+            // TODO °ÔÀÓ Áß ESC ´©¸£¸é ¸Þ´º·Î ³ª°¥ ¼ö ÀÖ°Ô ÇÏ±â
         }
         delete game;
     }

@@ -30,14 +30,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>소스 파일\games</Filter>
     </ClCompile>
     <ClCompile Include="console_handler.cpp">
       <Filter>소스 파일\handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
