@@ -8,9 +8,13 @@ private:
 
 public:
     GomokuGame(int size) : Game(size) { }
-
+	
     virtual bool isPlaceable(int x, int y) {
         // Some rules ...
+		if (IsExist(x, y)) {
+			printf("Already exist");
+			return false;
+		}
         return true;
     }
 };

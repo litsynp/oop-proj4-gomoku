@@ -144,9 +144,9 @@ void Game::update() {
             }
             else if (keyInput == SPACE) {
                 // 착수 가능 여부 확인 후, 선택된 좌표에 턴에 따라 흑/백돌 착수
-                if (isPlaceable(selectedBoardX, selectedBoardY)) {
-                    placeStone(selectedBoardX, selectedBoardY);
-
+				if (isPlaceable(selectedBoardX, selectedBoardY)) {
+					placeStone(selectedBoardX, selectedBoardY);
+				
                     // 착수를 했다면 while문 탈출하고 다음 턴의 시간을 표시할 준비를 한다
                     break;
                 }
@@ -166,27 +166,29 @@ void Game::render() {
     std::cout << "◎";
 }
 
+bool Game::IsExist(int x, int y) {
+	if (board[y][x] != EMPTY) return true;
+	else return false;
+}
+
+Symbols Game::getTurn() {
+	return this->turn;
+}
+
 void Game::placeStone(int x, int y) {
-    board[y][x] = turn;
+	board[y][x] = turn;
 
-    // 다음 턴으로 변경 (흑돌->백돌, 백돌->흑돌)
-    turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+	// 다음 턴으로 변경 (흑돌->백돌, 백돌->흑돌)
+	turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
 }
 
-void Game::placeStone(int x, int y, int whichStone) {
-    if (whichStone == BLACK_STONE) {
-        board[y][x] = BLACK_STONE;
-    }
-    else {
-        board[y][x] = WHITE_STONE;
-    }
+bool isPlaceable(int x, int y) {
+	// TO Do : 상속받은 클래스에서 오버로딩으로 생성
+	return true;
 }
 
-bool Game::isPlaceable(int x, int y) {
-    // TODO 룰을 확인한다
-    // TODO 룰에 따라서 반칙수인지, 둘 수 없는 수 인지 확인 후 true/false 반환
-    // ...
-    return true;
+void Game::setStone(int x, int y, Symbols whichStone) {
+	board[y][x] = whichStone;
 }
 
 int Game::getKeyInput() {
@@ -279,7 +281,8 @@ void Game::GetDirTable(int& x, int& y, int nDir) {
     y = dy[nDir];
 }
 
-// 착수되는 지점이 비어있는지 확인
+// 주어진 방향의 마지막돌의 자리가 비어있는지 확인하고
+// 그 위치로 좌표를 이동
 bool Game::IsEmpty(int& x, int& y, int nDir) {
     int dx, dy;
     GetDirTable(dx, dy, nDir);
@@ -292,23 +295,23 @@ bool Game::IsEmpty(int& x, int& y, int nDir) {
 
 //주어진 좌표에 돌을 두었을때 주어진 방향으로 연속된 돌의 갯수 카운트
 int Game::GetStoneCount(int x, int y, int nDir) {
-    int dx, dy;
-    int tx = x;
-    int ty = y;
-    int count = 0;
+	int dx, dy;
+	int tx = x;
+	int ty = y;
+	int count = 0;
 
-    if (board[y][x] != EMPTY) return 0;
-    placeStone(x, y);
-    GetDirTable(dx, dy, nDir);
-    for (; board[y][x] == turn; x += dx, y += dy) count++;
-    GetDirTable(dx, dy, nDir % 2 ? nDir - 1 : nDir + 1);
-    x = tx + dx;
-    y = ty + dy;
-    for (; board[y][x] == turn; x += dx, y += dy) count++;
-    placeStone(x, y, EMPTY);
-    return count;
+	if (board[y][x] != EMPTY) return 0;
+	setStone(x, y, turn);
+	GetDirTable(dx, dy, nDir);
+	for (; board[y][x] == turn; x += dx, y += dy) count++;
+
+	GetDirTable(dx, dy, nDir % 2 ? nDir - 1 : nDir + 1);
+	x = tx + dx;
+	y = ty + dy;
+	for (; board[y][x] == turn; x += dx, y += dy) count++;
+	setStone(tx, ty, EMPTY);
+	return count;
 }
-
 // Four나 OpenFour 가 되는지 판별하기 위해
 // 빈곳에 돌을 하나씩 두면서 오목이 되는지 검사
 bool Game::IsFiveForFour(int x, int y, int nDir) {
@@ -332,53 +335,54 @@ bool Game::IsSix(int x, int y) {
     return false;
 }
 
+
 // 돌을 놓았을 때 4인지를 검사
 bool Game::IsFour(int x, int y, int nDir) {
-    int tx, ty;
-    nDir % 2 ? nDir -= 1 : nDir;
-    placeStone(x, y);
-    for (int i = 0; i < 2; i++) {
-        tx = x;
-        ty = y;
-        if (IsEmpty(tx, ty, nDir + i)) {
-            if (IsFiveForFour(tx, ty, nDir + i)) {
-                placeStone(x, y, EMPTY);
-                return true;
-            }
-        }
-    }
-    placeStone(x, y, EMPTY);
-    return false;
+	int tx, ty;
+	nDir % 2 ? nDir -= 1 : nDir;
+	setStone(x, y, turn);
+	for (int i = 0; i < 2; i++) {
+		tx = x;
+		ty = y;
+		if (IsEmpty(tx, ty, nDir + i)) {
+			if (IsFiveForFour(tx, ty, nDir + i)) {
+				setStone(x, y, EMPTY);
+				return true;
+			}
+		}
+	}
+	setStone(x, y, EMPTY);
+	return false;
 }
 
 // 돌이 연속으로 4개이고 끝에 돌을 놓았을때 오목이 되면 열린 4이다
 int Game::IsOpenFour(int x, int y, int nDir) {
-    int tx, ty;
-    int sum = 0;
-    nDir % 2 ? nDir -= 1 : nDir;
-    placeStone(x, y);
-    for (int i = 0; i < 2; i++) {
-        tx = x;
-        ty = y;
-        if (IsEmpty(tx, ty, nDir + i))
-            if (IsFiveForFour(tx, ty, nDir + i)) sum++;
-    }
-    placeStone(x, y, EMPTY);
-    // 특이 케이스로 열린 4일때 한줄에서 44가 성립할때의 예외 처리
-    if (sum == 2) {
-        if (GetStoneCount(x, y, nDir) == 4) sum = 1;
-    }
-    else sum = 0;
-    return sum;
+	int tx, ty;
+	int sum = 0;
+	nDir % 2 ? nDir -= 1 : nDir;
+	setStone(x, y, turn);
+	for (int i = 0; i < 2; i++) {
+		tx = x;
+		ty = y;
+		if (IsEmpty(tx, ty, nDir + i))
+			if (IsFiveForFour(tx, ty, nDir + i)) sum++;
+	}
+	setStone(x, y, EMPTY);
+	// 특이 케이스로 열린 4일때 한줄에서 44가 성립할때의 예외 처리
+	if (sum == 2) {
+		if (GetStoneCount(x, y, nDir) == 4) sum = 1;
+	}
+	else sum = 0;
+	return sum;
 }
 
 // 금수로 4-4에 대해서 검사
 bool Game::IsDoubleFour(int x, int y) {
     int count = 0;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i+=2) {
         if (IsOpenFour(x, y, i) == 2) return true;
         else if (IsFour(x, y, i)) count++;
-        if (count == 2) return true;
+        if (count >= 2) return true;
     }
     return false;
 }
@@ -386,20 +390,20 @@ bool Game::IsDoubleFour(int x, int y) {
 // 열린 3에 대하여 검사
 // 열린 3은 돌을 하나 더 놓았을때 열린 4가 반드시 되어야 한다.
 bool Game::IsOpenThree(int x, int y, int nDir) {
-    int tx, ty;
-    placeStone(x, y);
-    for (int i = 0; i < 2; i++) {
-        tx = x;
-        ty = y;
-        if (IsEmpty(tx, ty, nDir += i)) {
-            if ((IsOpenFour(tx, ty, nDir) == 1)) {
-                placeStone(x, y, EMPTY);
-                return true;
-            }
-        }
-    }
-    placeStone(x, y, EMPTY);
-    return false;
+	int tx, ty;
+	setStone(x, y, turn);
+	for (int i = 0; i < 2; i++) {
+		tx = x;
+		ty = y;
+		if (IsEmpty(tx, ty, nDir += i)) {
+			if ((IsOpenFour(tx, ty, nDir) == 1) && isPlaceable(tx, ty)) {
+				setStone(x, y, EMPTY);
+				return true;
+			}
+		}
+	}
+	setStone(x, y, EMPTY);
+	return false;
 }
 
 // 금수인 3-3을 검사
