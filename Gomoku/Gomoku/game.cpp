@@ -50,6 +50,7 @@ Game::Game(int size) {
     }
 
     // 현재 턴 설정
+    turnNumber = 0;
     turn = BLACK_STONE;
     placeStone((size + 1) / 2, (size + 1) / 2); // 첫 턴으로 중심에 흑돌 착수
 
@@ -173,8 +174,13 @@ void Game::render() {
 void Game::placeStone(int x, int y) {
     board[y][x] = turn;
 
+    // 현재 턴 정보를 turns에 저장
+    TurnInfo newTurn(x, y, turnNumber, turn);
+    turns.push_back(newTurn);
+
     // 다음 턴으로 변경 (흑돌->백돌, 백돌->흑돌)
     turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+    turnNumber++;
 }
 
 void Game::setStone(int x, int y, Symbols whichStone) {

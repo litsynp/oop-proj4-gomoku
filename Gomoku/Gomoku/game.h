@@ -19,6 +19,9 @@ private:
     // Undo와 Redo 기능 구현을 위한 턴 정보를 저장하는 배열
     std::vector<TurnInfo> turns;
 
+    // 현재 몇 번째 턴인지를 저장
+    int turnNumber;
+
     // 현재 커서의 위치
     int cursorX;
     int cursorY;
