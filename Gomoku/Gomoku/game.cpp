@@ -52,9 +52,6 @@ Game::Game(int size) {
         board[i][size + 1] = WALL;
     }
 
-    // 현재 승자가 없으므로 EMPTY로 초기화
-    winner = EMPTY;
-
     // 현재 턴 설정
     turnNumber = 0;
     turn = BLACK_STONE;
@@ -156,16 +153,30 @@ void Game::update() {
             }
             else if (keyInput == SPACE) {
                 // 승자가 누구인지 결정되면 사용하기 위해 현재 턴이 누군지 저장
-                Symbols curTurn = turn;
+                Symbols winner = EMPTY;
+
 
                 // 착수 가능 여부 확인 후, 선택된 좌표에 턴에 따라 흑/백돌 착수
                 if (isPlaceable(selectedBoardX, selectedBoardY)) {
-                    placeStone(selectedBoardX, selectedBoardY);
-
-                    // 방금 둔 수로 게임에서 이겼는지 확인
+                    // 지금 둘 수로 게임에서 이겼는지 확인
                     if (IsFive(selectedBoardX, selectedBoardY)) {
                         // 승자가 결정된 경우
-                        winner = curTurn;
+                        winner = turn;
+                    }
+
+                    // 착수
+                    placeStone(selectedBoardX, selectedBoardY);
+
+                    // 승자가 존재한다면 마지막 오목판 상태 출력, 메세지박스 출력 및 게임 종료
+                    if (winner == BLACK_STONE) {
+                        printBoard();
+                        MessageBox(NULL, "오목 완성 - 흑돌의 승리입니다.", "BLACK STONE WINS!", MB_OK);
+                        exitGame = true;
+                    }
+                    else if (winner == WHITE_STONE) {
+                        printBoard();
+                        MessageBox(NULL, "오목 완성 - 백돌의 승리입니다.", "WHITE STONE WINS!", MB_OK);
+                        exitGame = true;
                     }
 
                     // 착수를 했다면 while문 탈출하고 다음 턴의 시간을 표시할 준비를 한다
@@ -192,18 +203,6 @@ void Game::update() {
             // TODO DELETE 등 처리
             // ...
         }
-    }
-
-    // TODO 승자 체크
-    if (winner != EMPTY) {
-        printf("The winner is: ");
-        switch (winner) {
-        case BLACK_STONE:
-            printf("BLACK!\n");
-        case WHITE_STONE:
-            printf("WHITE!\n");
-        }
-        exit(1);
     }
 }
 
@@ -293,7 +292,7 @@ int Game::getKeyInput() {
     return keyInput;
 }
 
-bool Game::isExitPRessed() {
+bool Game::isGameFinished() {
     return exitGame;
 }
 

@@ -16,9 +16,6 @@ private:
     // 현재 누구 턴인지 저장 (시작은 흑돌)
     Symbols turn;
 
-    // 누가 해당 게임에서 이겼는지 저장 (아무도 이기지 않았을 시 EMPTY)
-    Symbols winner;
-
     // 게임을 종료할지 여부를 저장 (ESC를 누를 경우 true, 아니면 false)
     bool exitGame;
 
@@ -88,7 +85,7 @@ public:
     int getKeyInput();
 
     // exitGame 변수를 반환 (메인 함수에서 주기적으로 확인해서 true일시 게임 종료, false일시 게임 진행)
-    bool isExitPRessed();
+    bool isGameFinished();
 
     /*************************************
      *         Console Graphics 관련

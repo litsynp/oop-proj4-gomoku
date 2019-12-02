@@ -73,7 +73,8 @@ int main(int argc, char** argv) {
             game->update();
             game->render();
 
-            if (game->isExitPRessed()) {
+            // 게임이 종료됐는지 확인
+            if (game->isGameFinished()) {
                 break;;
             }
         }
