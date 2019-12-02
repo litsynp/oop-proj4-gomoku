@@ -53,6 +53,8 @@ public:
     // 화면 업데이트
     void render();
 
+    // getter for turn member variable
+    Symbols getTurn();
 
     /*************************************
      *              착수 관련
@@ -87,6 +89,7 @@ public:
     /*************************************
      *            게임 룰 관련
      *************************************/
+    bool IsExist(int x, int y);                         // 돌을 놓기전에 둘수 있는지 우선 판별
     void GetDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기
     int GetStoneCount(int x, int y, int nDir);          // 정해진 방향으로 있는 돌의 갯수 카운트
     bool IsEmpty(int& x, int& y, int nDir);             // 착수 지점이 비어있는지 확인
