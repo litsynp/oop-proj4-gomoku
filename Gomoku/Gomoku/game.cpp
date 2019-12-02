@@ -189,6 +189,13 @@ Symbols Game::getTurn() {
 void Game::placeStone(int x, int y) {
     board[y][x] = turn;
 
+    // TODO
+    // 현재 턴 넘버와 같거나 큰 넘버를 가진, 다른 분기의 수를 전부 삭제
+    if (!turns.empty() && (turns.size() >= turnNumber)) {
+        std::vector<TurnInfo>::iterator curIter = turns.begin() + turnNumber - 1; // 현재 턴부터의 iterator
+        turns.erase(curIter, curIter + (turns.size() - turnNumber) + 1);
+    }
+
     // 현재 턴 정보를 turns에 저장
     TurnInfo newTurn(x, y, turnNumber, turn);
     turns.push_back(newTurn);
@@ -203,28 +210,45 @@ void Game::setStone(int x, int y, Symbols whichStone) {
 }
 
 int Game::undoStone() {
-    if (turns.empty()) {
-        // 되돌릴 턴이 없다면 아무 일도 수행하지 않고 반환
+    if (turns.empty() || turnNumber == 1) {
+        // 첫번째 턴에서 undo를 하려고 하거나 되돌릴 턴이 없다면 아무 일도 수행하지 않고 반환
         return 1;
     }
 
-    // 마지막 턴의 정보를 가져와 저장
-    TurnInfo lastTurn = turns.back();
-    Symbols whoIsLastTurn = lastTurn.getWhoseTurn();    // 가장 마지막 턴이 백돌인지 흑돌인지 가져옴
+    // 이전 턴의 정보를 불러옴
+    TurnInfo lastTurn = turns.at(turnNumber - 2);
+    Symbols whoIsLastTurn = lastTurn.getWhoseTurn();    // 가장 마지막 턴이 백돌인지 흑돌인지 판단
     int lastTurnX = lastTurn.getX();
     int lastTurnY = lastTurn.getY();
-
-    // 가장 마지막 턴의 정보를 삭제
-    turns.pop_back();
 
     // 게임 정보 업데이트
     turnNumber--;                                       // 게임을 1턴 되돌림
     board[lastTurnY][lastTurnX] = EMPTY;                // 마지막 턴의 정보를 되돌림
-    turn = (whoIsLastTurn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+    turn = whoIsLastTurn;
     return 0; // 성공적으로 턴을 되돌림
 }
 
 int Game::redoStone() {
+    // TODO
+
+    if (turns.size() < turnNumber) {
+        // 다시 가져올 턴이 없음
+        return 1;
+    }
+
+    // 현재 턴과 같은 턴 넘버를 가진 턴 정보를 가져옴
+    TurnInfo redoTurn = turns.at(turnNumber - 1);
+    Symbols whoIsRedoTurn = redoTurn.getWhoseTurn();    // 가장 마지막 턴이 백돌인지 흑돌인지 가져옴
+    int redoTurnX = redoTurn.getX();
+    int reooTurnY = redoTurn.getY();
+
+    // 게임 정보 업데이트
+    board[reooTurnY][redoTurnX] = whoIsRedoTurn;        // 마지막 턴의 정보를 되돌림
+      
+    // 다음 턴으로 넘김
+    turn = (whoIsRedoTurn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+    turnNumber++;
+    
     return 0; // 성공적으로 턴을 복구함
 }
 
