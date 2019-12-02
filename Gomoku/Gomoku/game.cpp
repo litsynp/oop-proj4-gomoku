@@ -95,12 +95,20 @@ void Game::update() {
             printf("  ");
         }
 
+        // 착수 없이 30초 시간제한이 끝나면 시간패
         if (clock() - time > 30000) {
-            // 착수 없이 30초 시간제한이 끝남
             timeLimitExceeded = true;
 
-            // TODO 시간패 추가하기
-            // ...
+            // 메세지박스 출력
+            if (turn == BLACK_STONE) {
+                MessageBox(NULL, "Time Over - 백돌의 승리입니다.", "WHITE STONE WINS!", MB_OK);
+            }
+            else {
+                MessageBox(NULL, "Time Over - 흑돌의 승리입니다.", "BLACK STONE WINS!", MB_OK);
+            }
+            // 게임 종료
+            exitGame = true;
+            break;
         }
 
         // 키 입력을 받았을 경우
@@ -265,11 +273,11 @@ int Game::redoStone() {
 
     // 게임 정보 업데이트
     board[reooTurnY][redoTurnX] = whoIsRedoTurn;        // 마지막 턴의 정보를 되돌림
-      
+
     // 다음 턴으로 넘김
     turn = (whoIsRedoTurn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
     turnNumber++;
-    
+
     return 0; // 성공적으로 턴을 복구함
 }
 
@@ -285,7 +293,7 @@ int Game::getKeyInput() {
     return keyInput;
 }
 
-bool Game::isExitPRessed(){
+bool Game::isExitPRessed() {
     return exitGame;
 }
 

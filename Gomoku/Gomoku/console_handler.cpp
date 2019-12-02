@@ -135,7 +135,6 @@ int ConsoleHandler::getBoardSizeMenuInput() {
 }
 
 void ConsoleHandler::printSymbol(Symbols symbolOnBoardXY, int size, int x, int y) {
-    // TODO Symbol¸¶´Ù Background/Foreground »öÄ¥
     ConsoleHandler::setConsoleColor(BLACK, BROWN);
     if (symbolOnBoardXY == EMPTY) {
         // Corners
