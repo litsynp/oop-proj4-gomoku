@@ -22,6 +22,7 @@
     <ClCompile Include="console_handler.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="turn_info.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console_handler.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="normal_game.h" />
     <ClInclude Include="renju_game.h" />
     <ClInclude Include="symbols.h" />
+    <ClInclude Include="turn_info.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

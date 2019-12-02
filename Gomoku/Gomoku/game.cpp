@@ -58,6 +58,10 @@ Game::Game(int size) {
 }
 
 Game::~Game() {
+    // Turn 정보를 담은 벡터 삭제
+    turns.clear();
+
+    // Board 정보 삭제
     for (int i = 0; i < size + 2; ++i) {
         delete[] board[i];
     }

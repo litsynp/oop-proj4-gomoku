@@ -39,6 +39,9 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="turn_info.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="keys.h">
       <Filter>헤더 파일\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="turn_info.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,8 @@
 
 #define TIME_LIMIT 30000    // 턴당 시간제한
 #include "console_handler.h"
+#include "turn_info.h"
+#include <vector>
 
 // 게임 포괄적인 부분을 담당하는 추상클래스
 class Game {
@@ -14,8 +16,8 @@ private:
     // 현재 누구 턴인지 저장 (시작은 흑돌)
     Symbols turn;
 
-    // TODO 룰검사를 위한 임시보드
-    // Symbols** tBoard;
+    // Undo와 Redo 기능 구현을 위한 턴 정보를 저장하는 배열
+    std::vector<TurnInfo> turns;
 
     // 현재 커서의 위치
     int cursorX;
