@@ -69,6 +69,11 @@ public:
     // 룰에 따라 달라지므로 상속 함수에서 정의해야 함
     virtual bool isPlaceable(int x, int y) = 0;
 
+    // 사용자가 U를 눌렀을 때 실행되는 Undo 기능 (0: 성공, 1: 실패)
+    int undoStone();
+
+    // 사용자가 R을 눌렀을 때 실행되는 Redo 기능 (0: 성공, 1: 실패)
+    int redoStone();
 
     /*************************************
      *     Keyboard Input Handling 관련

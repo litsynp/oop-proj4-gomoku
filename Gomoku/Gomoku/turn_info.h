@@ -14,6 +14,8 @@ public:
     TurnInfo(int x, int y, int turnNumber, Symbols whoseTurn);
     
     // getters
+    int getX();
+    int getY();
     int getTurnNumber();
     Symbols getWhoseTurn();
 };

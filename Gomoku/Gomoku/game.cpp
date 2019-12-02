@@ -156,10 +156,21 @@ void Game::update() {
                     break;
                 }
             }
+            else if (keyInput == KEY_U || keyInput == KEY_U + 32) {
+                // U: Undo 실행
+                if (undoStone() == 0) {
+                    break;
+                }
+            }
+            else if (keyInput == KEY_R || keyInput == KEY_R + 32) {
+                // R: Redo 실행
+                if (redoStone() == 0) {
+                    break;
+                }
+            }
 
-            // TODO ESC, DELETE, U, 등등 처리
+            // TODO ESC, DELETE 등 처리
             // ...
-
         }
     }
 }
@@ -191,12 +202,32 @@ void Game::setStone(int x, int y, Symbols whichStone) {
     board[y][x] = whichStone;
 }
 
-bool Game::isPlaceable(int x, int y) {
-    // TODO 룰을 확인한다
-    // TODO 룰에 따라서 반칙수인지, 둘 수 없는 수 인지 확인 후 true/false 반환
-    // ...
-    return true;
+int Game::undoStone() {
+    if (turns.empty()) {
+        // 되돌릴 턴이 없다면 아무 일도 수행하지 않고 반환
+        return 1;
+    }
+
+    // 마지막 턴의 정보를 가져와 저장
+    TurnInfo lastTurn = turns.back();
+    Symbols whoIsLastTurn = lastTurn.getWhoseTurn();    // 가장 마지막 턴이 백돌인지 흑돌인지 가져옴
+    int lastTurnX = lastTurn.getX();
+    int lastTurnY = lastTurn.getY();
+
+    // 가장 마지막 턴의 정보를 삭제
+    turns.pop_back();
+
+    // 게임 정보 업데이트
+    turnNumber--;                                       // 게임을 1턴 되돌림
+    board[lastTurnY][lastTurnX] = EMPTY;                // 마지막 턴의 정보를 되돌림
+    turn = (whoIsLastTurn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+    return 0; // 성공적으로 턴을 되돌림
 }
+
+int Game::redoStone() {
+    return 0; // 성공적으로 턴을 복구함
+}
+
 
 int Game::getKeyInput() {
     int keyInput = _getch();
@@ -221,7 +252,6 @@ void Game::printGameScreen() {
 
     ConsoleHandler::displayShortcuts(size);
 }
-
 
 // 임시함수: 오목판 출력 (나중에 다듬어서 쓸 것)
 void Game::printBoard() {
