@@ -72,7 +72,11 @@ int main(int argc, char** argv) {
         while (true) {
             game->update();
             game->render();
+
             // TODO 게임 중 ESC 누르면 메뉴로 나갈 수 있게 하기
+            if (game->isExitPRessed()) {
+                break;;
+            }
         }
         delete game;
     }

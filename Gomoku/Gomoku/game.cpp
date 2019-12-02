@@ -12,6 +12,9 @@
 #include <Windows.h>
 
 Game::Game(int size) {
+    // 게임을 시작
+    exitGame = false;
+
     // 콘솔창 설정
     system("title 오목 게임");              // 콘솔창 이름 설정
     ConsoleHandler::setPredefinedConsoleSize();
@@ -48,6 +51,9 @@ Game::Game(int size) {
         board[i][0] = WALL;
         board[i][size + 1] = WALL;
     }
+
+    // 현재 승자가 없으므로 EMPTY로 초기화
+    winner = EMPTY;
 
     // 현재 턴 설정
     turnNumber = 0;
@@ -141,30 +147,55 @@ void Game::update() {
                 }
             }
             else if (keyInput == SPACE) {
+                // 승자가 누구인지 결정되면 사용하기 위해 현재 턴이 누군지 저장
+                Symbols curTurn = turn;
+
                 // 착수 가능 여부 확인 후, 선택된 좌표에 턴에 따라 흑/백돌 착수
                 if (isPlaceable(selectedBoardX, selectedBoardY)) {
                     placeStone(selectedBoardX, selectedBoardY);
+
+                    // 방금 둔 수로 게임에서 이겼는지 확인
+                    if (IsFive(selectedBoardX, selectedBoardY)) {
+                        // 승자가 결정된 경우
+                        winner = curTurn;
+                    }
 
                     // 착수를 했다면 while문 탈출하고 다음 턴의 시간을 표시할 준비를 한다
                     break;
                 }
             }
             else if (keyInput == KEY_U || keyInput == KEY_U + 32) {
-                // U: Undo 실행
+                // U를 눌렀을 경우 undo 실행
                 if (undoStone() == 0) {
                     break;
                 }
             }
             else if (keyInput == KEY_R || keyInput == KEY_R + 32) {
-                // R: Redo 실행
+                // R을 눌렀을 경우 redo 실행
                 if (redoStone() == 0) {
                     break;
                 }
             }
-
-            // TODO ESC, DELETE 등 처리
+            else if (keyInput == ESC) {
+                // ESC를 눌렀을 경우 게임을 종료
+                exitGame = true;
+                break;
+            }
+            // TODO DELETE 등 처리
             // ...
         }
+    }
+
+    // TODO 승자 체크
+    if (winner != EMPTY) {
+        printf("The winner is: ");
+        switch (winner) {
+        case BLACK_STONE:
+            printf("BLACK!\n");
+        case WHITE_STONE:
+            printf("WHITE!\n");
+        }
+        exit(1);
     }
 }
 
@@ -254,6 +285,9 @@ int Game::getKeyInput() {
     return keyInput;
 }
 
+bool Game::isExitPRessed(){
+    return exitGame;
+}
 
 void Game::printGameScreen() {
     printBoard();

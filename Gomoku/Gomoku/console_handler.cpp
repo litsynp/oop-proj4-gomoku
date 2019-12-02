@@ -35,6 +35,7 @@ void ConsoleHandler::showRuleMenu() {
     system("title 오목 게임");// 콘솔창 이름 설정
     setPredefinedConsoleSize();
     hideCursorOnConsole();
+    setConsoleColor(WHITE, BLACK);
 
     const std::string ruleMenus[] = {
         "O M O K  G A M E",
@@ -87,8 +88,7 @@ void ConsoleHandler::showBoardSizeMenu() {
     system("title 오목 게임");// 콘솔창 이름 설정
     setPredefinedConsoleSize();
     hideCursorOnConsole();
-
-    int x, y;
+    setConsoleColor(WHITE, BLACK);
 
     const std::string sizeMenus[] = {
         "  SIZE     SELECT",
@@ -107,8 +107,8 @@ void ConsoleHandler::showBoardSizeMenu() {
         "  3. "
     };
 
-    x = menuSelections[1].length();
-    y = sizeof(menuSelections) / sizeof(menuSelections[0]);
+    int x = menuSelections[1].length();
+    int y = sizeof(menuSelections) / sizeof(menuSelections[0]);
 
     x = 29 - x / 2;
     y = 12 - y / 2 - 1;
