@@ -21,7 +21,10 @@
   <ItemGroup>
     <ClCompile Include="console_handler.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gomoku_game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="normal_game.cpp" />
+    <ClCompile Include="renju_game.cpp" />
     <ClCompile Include="turn_info.cpp" />
   </ItemGroup>
   <ItemGroup>

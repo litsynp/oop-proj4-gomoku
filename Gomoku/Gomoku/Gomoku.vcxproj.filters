@@ -42,6 +42,15 @@
     <ClCompile Include="turn_info.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="gomoku_game.cpp">
+      <Filter>소스 파일\games</Filter>
+    </ClCompile>
+    <ClCompile Include="normal_game.cpp">
+      <Filter>소스 파일\games</Filter>
+    </ClCompile>
+    <ClCompile Include="renju_game.cpp">
+      <Filter>소스 파일\games</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
