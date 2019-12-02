@@ -136,6 +136,7 @@ int ConsoleHandler::getBoardSizeMenuInput() {
 
 void ConsoleHandler::printSymbol(Symbols symbolOnBoardXY, int size, int x, int y) {
     // TODO Symbol¸¶´Ù Background/Foreground »öÄ¥
+    ConsoleHandler::setConsoleColor(BLACK, BROWN);
     if (symbolOnBoardXY == EMPTY) {
         // Corners
         if (y == 1 && x == 1)                  std::cout << "¦£ ";
@@ -156,11 +157,18 @@ void ConsoleHandler::printSymbol(Symbols symbolOnBoardXY, int size, int x, int y
         std::cout << "¡Ü";
     }
     else if (symbolOnBoardXY == WHITE_STONE) {
-        std::cout << "¡Û";
+        ConsoleHandler::setConsoleColor(WHITE, BROWN);
+        std::cout << "¡Ü";
     }
     else { // Wall
         std::cout << "¡Ø";
     }
+}
+
+void ConsoleHandler::displayCursor(int cursorX, int cursorY) {
+    ConsoleHandler::setConsoleColor(RED, BROWN);
+    ConsoleHandler::gotoxy(cursorX, cursorY);
+    std::cout << "¡Ý";
 }
 
 void ConsoleHandler::displayShortcuts(int size) {

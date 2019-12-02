@@ -111,40 +111,33 @@ void Game::update() {
             ConsoleHandler::gotoxy(cursorX, cursorY);
             ConsoleHandler::printSymbol(board[selectedBoardY][selectedBoardX], size, selectedBoardX, selectedBoardY);
 
-            // 커서의 색상 설정
-            ConsoleHandler::setConsoleColor(WHITE, BROWN);
-
             // 커서가 움직이면 선택된 보드 좌표 (selectedBoardX, Y) 도 움직여야 함
             if (keyInput == UP) {
                 if (cursorY - vy >= yBoundTop) {
                     selectedBoardY -= 1;
                     cursorY -= vy;
-                    ConsoleHandler::gotoxy(cursorX, cursorY);
-                    printf("◎");
+                    ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
             else if (keyInput == DOWN) {
                 if (cursorY + vy <= yBoundBtm) {
                     selectedBoardY += 1;
                     cursorY += vy;
-                    ConsoleHandler::gotoxy(cursorX, cursorY);
-                    printf("◎");
+                    ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
             else if (keyInput == LEFT) {
                 if (cursorX - vx >= xBoundLft) {
                     selectedBoardX -= 1;
                     cursorX -= vx;
-                    ConsoleHandler::gotoxy(cursorX, cursorY);
-                    printf("◎");
+                    ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
             else if (keyInput == RIGHT) {
                 if (cursorX + vx <= xBoundRgt) {
                     selectedBoardX += 1;
                     cursorX += vx;
-                    ConsoleHandler::gotoxy(cursorX, cursorY);
-                    printf("◎");
+                    ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
             else if (keyInput == SPACE) {
@@ -177,9 +170,9 @@ void Game::update() {
 
 void Game::render() {
     printBoard();
-    ConsoleHandler::gotoxy(cursorX, cursorY);
-    ConsoleHandler::setConsoleColor(WHITE, BROWN);
-    std::cout << "◎";
+
+    // 커서 출력
+    ConsoleHandler::displayCursor(cursorX, cursorY);
 }
 
 Symbols Game::getTurn() {
@@ -189,7 +182,6 @@ Symbols Game::getTurn() {
 void Game::placeStone(int x, int y) {
     board[y][x] = turn;
 
-    // TODO
     // 현재 턴 넘버와 같거나 큰 넘버를 가진, 다른 분기의 수를 전부 삭제
     if (!turns.empty() && (turns.size() >= turnNumber)) {
         std::vector<TurnInfo>::iterator curIter = turns.begin() + turnNumber - 1; // 현재 턴부터의 iterator
@@ -229,8 +221,6 @@ int Game::undoStone() {
 }
 
 int Game::redoStone() {
-    // TODO
-
     if (turns.size() < turnNumber) {
         // 다시 가져올 턴이 없음
         return 1;
@@ -268,16 +258,17 @@ int Game::getKeyInput() {
 void Game::printGameScreen() {
     printBoard();
 
+    ConsoleHandler::setConsoleColor(WHITE, BLACK);
     ConsoleHandler::gotoxy((25 - size), size + (27 - size) / 2 + 1);
-    printf("●");
-
-    ConsoleHandler::gotoxy(size * 2 + (29 - size), size + (27 - size) / 2 + 1);
     printf("○");
+
+    ConsoleHandler::setConsoleColor(WHITE, BLACK);
+    ConsoleHandler::gotoxy(size * 2 + (29 - size), size + (27 - size) / 2 + 1);
+    printf("●");
 
     ConsoleHandler::displayShortcuts(size);
 }
 
-// 임시함수: 오목판 출력 (나중에 다듬어서 쓸 것)
 void Game::printBoard() {
     // 보드 출력 위치로 이동
     ConsoleHandler::gotoxy(25 - size, (23 - size) / 2);
@@ -308,7 +299,7 @@ void Game::printBoard() {
     }
     printf("  ");
 
-    ConsoleHandler::setConsoleColor(WHITE, BLACK);
+    ConsoleHandler::setConsoleColor(WHITE, BLACK); // 콘솔 색상 설정
 
     // 해당 턴이 누구 턴인지 메세지를 출력
     if (turn == BLACK_STONE) {
@@ -317,7 +308,7 @@ void Game::printBoard() {
         ConsoleHandler::gotoxy(size * 2 + (21 - size), size + (27 - size) / 2 + 2);
         ConsoleHandler::showMsg(2);
     }
-    if (turn == WHITE_STONE) {
+    else { // if (turn == WHITE_STONE)
         ConsoleHandler::gotoxy(size * 2 + (21 - size), size + (27 - size) / 2 + 2);
         ConsoleHandler::showMsg(1);
         ConsoleHandler::gotoxy((25 - size), size + (27 - size) / 2 + 2);

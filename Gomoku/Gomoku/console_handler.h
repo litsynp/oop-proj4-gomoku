@@ -55,6 +55,9 @@ public:
     // x, y에 해당하는 오목판 기호 한 칸 출력
     static void printSymbol(Symbols symbolOnBoardXY, int size, int x, int y);
 
+    // x, y에 커서 출력
+    static void displayCursor(int cursorX, int cursorY);
+
     // 화면에 남은 시간 표시
     static void displayRemainingTime(clock_t time);
 
