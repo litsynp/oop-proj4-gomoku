@@ -13,9 +13,9 @@ using namespace std;
 
 int main(int argc, char** argv) {
     Game* game;                     // 게임 핸들러
-    bool exitGame = false;
+    bool exitProgram = false;       // 프로그램 종료 플래그
 
-    while (exitGame == false) {
+    while (exitProgram == false) {
         int boardSize;             // 오목판 크기
         int selectedRuleInMenu;    // 선택한 룰
 
@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
             if (selectedRuleInMenu == Keys::ESC) {
                 // ESC 또는 나가기를 선택했을 경우
                 // TODO 종료 메시지 출력
-                exitGame = true;
+                exitProgram = true;
                 break;
             }
 
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
             ConsoleHandler::showBoardSizeMenu();
             int selectedBoardSizeInMenu = ConsoleHandler::getBoardSizeMenuInput();
 
-            // 선택된 오목판 크기 설정
+            // 키보드 입력으로 선택된 오목판 크기 설정
             if (selectedBoardSizeInMenu == 1) {
                 boardSize = 15;
                 break;
@@ -50,8 +50,8 @@ int main(int argc, char** argv) {
             }
         }
 
-        // 룰 설정 화면에서 ESC 또는 나가기를 선택했을 경우 게임을 바로 종료
-        if (exitGame == true) {
+        // 룰 설정 화면에서 ESC 또는 나가기를 선택했을 경우 프로그램을 바로 종료
+        if (exitProgram == true) {
             break;
         }
 
@@ -68,15 +68,15 @@ int main(int argc, char** argv) {
             game = new RenjuGame(boardSize);
         }
 
+        bool exitGame = false;     // 게임 종료 플래그
+
         // 게임 진행
-        while (true) {
+        while (exitGame == false) {
             game->update();
             game->render();
 
             // 게임이 종료됐는지 확인
-            if (game->isGameFinished()) {
-                break;;
-            }
+            exitGame = game->isGameFinished();
         }
         delete game;
     }
