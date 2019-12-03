@@ -9,6 +9,7 @@ enum Keys {
     RIGHT = 77,
     DOWN = 80,
     SPACE = 32,
+    DEL = 83,
 
     // alphabets
     KEY_R = 82, // 32씩 더하면 lowercase

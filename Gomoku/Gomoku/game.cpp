@@ -73,7 +73,7 @@ Game::~Game() {
 }
 
 void Game::update() {
-    bool timeLimitExceeded = false;
+    bool timeLimitExceeded = false; // 시간 제한이 지났는지 플래그
     clock_t time = clock();
 
     // 30초가 지나면 시간패
@@ -123,35 +123,35 @@ void Game::update() {
             ConsoleHandler::printSymbol(board[selectedBoardY][selectedBoardX], size, selectedBoardX, selectedBoardY);
 
             // 커서가 움직이면 선택된 보드 좌표 (selectedBoardX, Y) 도 움직여야 함
-            if (keyInput == UP) {
+            if (keyInput == Keys::UP) {
                 if (cursorY - vy >= yBoundTop) {
                     selectedBoardY -= 1;
                     cursorY -= vy;
                     ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
-            else if (keyInput == DOWN) {
+            else if (keyInput == Keys::DOWN) {
                 if (cursorY + vy <= yBoundBtm) {
                     selectedBoardY += 1;
                     cursorY += vy;
                     ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
-            else if (keyInput == LEFT) {
+            else if (keyInput == Keys::LEFT) {
                 if (cursorX - vx >= xBoundLft) {
                     selectedBoardX -= 1;
                     cursorX -= vx;
                     ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
-            else if (keyInput == RIGHT) {
+            else if (keyInput == Keys::RIGHT) {
                 if (cursorX + vx <= xBoundRgt) {
                     selectedBoardX += 1;
                     cursorX += vx;
                     ConsoleHandler::displayCursor(cursorX, cursorY);
                 }
             }
-            else if (keyInput == SPACE) {
+            else if (keyInput == Keys::SPACE) {
                 // 승자가 누구인지 결정되면 사용하기 위해 현재 턴이 누군지 저장
                 Symbols winner = EMPTY;
 
@@ -183,30 +183,34 @@ void Game::update() {
                     break;
                 }
             }
-            else if (keyInput == KEY_U || keyInput == KEY_U + 32) {
+            else if (keyInput == Keys::KEY_U || keyInput == Keys::KEY_U + 32) {
                 // U를 눌렀을 경우 undo 실행
                 if (undoStone() == 0) {
                     break;
                 }
             }
-            else if (keyInput == KEY_R || keyInput == KEY_R + 32) {
+            else if (keyInput == Keys::KEY_R || keyInput == Keys::KEY_R + 32) {
                 // R을 눌렀을 경우 redo 실행
                 if (redoStone() == 0) {
                     break;
                 }
             }
-            else if (keyInput == ESC) {
+            else if (keyInput == Keys::ESC) {
                 // ESC를 눌렀을 경우 게임을 종료
                 exitGame = true;
                 break;
             }
-            // TODO DELETE 등 처리
-            // ...
+            else if (keyInput == Keys::DEL) {
+                // DELETE를 눌렀을 경우 착수하지 않고 현재 턴을 종료
+                turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
+                break;
+            }
         }
     }
 }
 
 void Game::render() {
+    // 화면 출력
     printBoard();
 
     // 커서 출력
