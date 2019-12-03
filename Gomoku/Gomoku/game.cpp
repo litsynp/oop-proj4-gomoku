@@ -3,11 +3,6 @@
 #include "keys.h"
 #include "console_handler.h"
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-
 #include <conio.h>
 #include <Windows.h>
 

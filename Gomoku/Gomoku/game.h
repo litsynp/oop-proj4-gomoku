@@ -2,6 +2,7 @@
 #define _GAME_H_
 
 #define TIME_LIMIT 30000    // 턴당 시간제한
+
 #include "console_handler.h"
 #include "turn_info.h"
 #include <vector>
