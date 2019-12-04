@@ -100,24 +100,22 @@ public:
     /*************************************
      *            게임 룰 관련
      *************************************/
-    bool IsExist(int x, int y);                         // 돌을 놓기전에 둘수 있는지 우선 판별
-    void GetDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기
-    int GetStoneCount(int x, int y, int nDir);          // 정해진 방향으로 있는 돌의 갯수 카운트
-    bool IsEmpty(int& x, int& y, int nDir);             // 착수 지점이 비어있는지 확인
+    bool isExist(int x, int y);                         // 돌을 놓기전에 둘수 있는지 우선 판별
+    void getDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기
+    int getStoneCount(int x, int y, int nDir);          // 정해진 방향으로 있는 돌의 갯수 카운트
+    bool isEmpty(int& x, int& y, int nDir);             // 착수 지점이 비어있는지 확인
 
-    bool IsFiveForFour(int x, int y, int nDir);         // 주어진 방향으로 돌이 5개가 되는지 확인 
-    bool IsFive(int x, int y);                          // 승리조건 판별
-    bool IsSix(int x, int y);                           // 장목인 6개이상인 경우
+    bool isFiveForFour(int x, int y, int nDir);         // 주어진 방향으로 돌이 5개가 되는지 확인 
+    bool isFive(int x, int y);                          // 승리조건 판별
+    bool isSix(int x, int y);                           // 장목인 6개이상인 경우
 
-    bool IsFour(int x, int y, int nDir);                // 돌의 갯수가 4인 경우
-    int IsOpenFour(int x, int y, int nDir);             // 양쪽으로 열린 4의 경우
-    bool IsDoubleFour(int x, int y);                    // 금수인 4-4를 확인
+    bool isFour(int x, int y, int nDir);                // 돌의 갯수가 4인 경우
+    int isOpenFour(int x, int y, int nDir);             // 양쪽으로 열린 4의 경우
+    bool isDoubleFour(int x, int y);                    // 금수인 4-4를 확인
 
-    bool IsOpenThree(int x, int y, int nDir);           // 양쪽으로 열린 3의 경우
-    bool IsDoubleThree(int x, int y);                   // 금수인 3-3을 확인
-    bool IsForbidden(int x, int y) { return false; };   // 모든 금수 조건을 검사
-
+    bool isOpenThree(int x, int y, int nDir);           // 양쪽으로 열린 3의 경우
+    bool isDoubleThree(int x, int y);                   // 금수인 3-3을 확인
+    bool isForbidden(int x, int y) { return false; };   // 모든 금수 조건을 검사
 };
-
 
 #endif
