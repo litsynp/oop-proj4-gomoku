@@ -493,7 +493,7 @@ bool Game::IsOpenThree(int x, int y, int nDir) {
         tx = x;
         ty = y;
         if (IsEmpty(tx, ty, nDir += i)) {
-            if ((IsOpenFour(tx, ty, nDir) == 1) && isPlaceable(tx, ty)) {
+            if ((IsOpenFour(tx, ty, nDir) == 1)) {
                 setStone(x, y, EMPTY);
                 return true;
             }
