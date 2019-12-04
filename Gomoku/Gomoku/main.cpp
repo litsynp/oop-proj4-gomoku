@@ -57,10 +57,12 @@ int main(int argc, char** argv) {
 
         switch (selectedRuleInMenu) {
         case GameRule::NORMAL:
-			game = new NormalGame(boardSize); break;
+            game = new NormalGame(boardSize);
+            break;
         case GameRule::GOMOKU:
             // 急琶等 逢捞 坷格逢老 版快
-			game = new GomokuGame(boardSize); break;
+            game = new GomokuGame(boardSize);
+            break;
         default:
             // 急琶等 逢捞 坊林逢老 版快
             game = new RenjuGame(boardSize);

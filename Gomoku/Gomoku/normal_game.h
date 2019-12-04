@@ -5,19 +5,19 @@
 
 class NormalGame : public Game {
 private:
+
 public:
     NormalGame(int size) : Game(size) { }
 
     virtual bool isPlaceable(int x, int y) {
-        // Some rules ...
-		if (IsExist(x, y)) {
-			printf("Already exist");
-			return false;
-		}
-		if (IsDoubleThree(x, y)) {
-			printf("3-3 금수 by normal rule");
-			return false;
-		}
+        if (IsExist(x, y)) {
+            printf("Already exist");
+            return false;
+        }
+        if (IsDoubleThree(x, y)) {
+            printf("3-3 금수 by normal rule");
+            return false;
+        }
         return true;
     }
 };

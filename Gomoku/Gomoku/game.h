@@ -14,9 +14,6 @@ private:
     // 현재 누구 턴인지 저장 (시작은 흑돌)
     Symbols turn;
 
-    // TODO 룰검사를 위한 임시보드
-    // Symbols** tBoard;
-
     // 현재 커서의 위치
     int cursorX;
     int cursorY;
@@ -48,18 +45,22 @@ public:
     // 화면 업데이트
     void render();
 
+    // getter for turn member variable
+    Symbols getTurn();
 
     /*************************************
      *              착수 관련
      *************************************/
-     // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치
+     // 멤버변수 turn의 값에 따라 오목판에 흑돌/백돌 배치 후 턴 변경
     void placeStone(int x, int y);
+
+    // 턴 변경 없이 whichStone의 값에 따라 오목판에 흑돌/백돌 배치
+    void setStone(int x, int y, Symbols whichStone);
 
     // board의 x, y에 그 수를 둘 수 있는지 확인한다
     // 룰에 따라 달라지므로 상속 함수에서 정의해야 함
-	virtual bool isPlaceable(int x, int y) = 0;
-	// turn 확인
-	Symbols getTurn();
+    virtual bool isPlaceable(int x, int y) = 0;
+
 
     /*************************************
      *     Keyboard Input Handling 관련
@@ -80,8 +81,7 @@ public:
     /*************************************
      *            게임 룰 관련
      *************************************/
-	void setStone(int x, int y, Symbols whichStone);	// whichStone의 값에 따라 오목판에 흑돌/백돌/EMPTY 배치
-	bool IsExist(int x, int y);							// 돌을 놓기전에 둘수 있는지 우선 판별
+    bool IsExist(int x, int y);							// 돌을 놓기전에 둘수 있는지 우선 판별
     void GetDirTable(int& x, int& y, int nDir);         // 돌을 놓은 위치를 기준으로 8방향을 표기하고 그 방향에따른 좌표 반환
     int GetStoneCount(int x, int y, int nDir);          // 정해진 방향으로 있는 돌의 갯수 카운트
     bool IsEmpty(int& x, int& y, int nDir);             // 임시로 둔 돌의 방향에 따라 그 끝이 비어있는지 확인하고 그에따른 좌표 반환
@@ -96,7 +96,6 @@ public:
 
     bool IsOpenThree(int x, int y, int nDir);           // 양쪽으로 열린 3의 경우
     bool IsDoubleThree(int x, int y);                   // 금수인 3-3을 확인
- 
 };
 
 #endif
