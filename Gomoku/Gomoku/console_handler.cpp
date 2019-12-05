@@ -10,11 +10,11 @@
 #include <iostream>
 
 const std::string shortcutsMsg[] = {
-    "스페이스바 : 착  수",
-    "방  향  키 : 이  동",
+    " Spacebar  : Place ",
+    "Arrow Keys : Move  ",
     "    U      : Undo  ",
     "    R      : Redo  ",
-    "Delete Key : Pass  "
+    "  Delete   : Pass  "
 };
 
 const std::string turnMsg[] = {
@@ -39,22 +39,22 @@ void ConsoleHandler::showRuleMenu() {
 
     const std::string ruleMenus[] = {
         "O M O K  G A M E",
-        "고모쿠(GOMOKU) 룰",
-        "일  반(NORMAL) 룰",
-        "렌  주(RENJU)  룰",
-        "그   만   하   기"
+        " OMOK      RULE ",
+        " NORMAL    RULE ",
+        " RENJU     RULE ",
+        "      EXIT      "
     };
 
     const std::string menuSelections[] = {
         "   ",
         "                        ",
-        " 1. ",
+        "  1. ",
         "                        ",
-        " 2. ",
+        "  2. ",
         "                        ",
-        " 3. ",
+        "  3. ",
         "                        ",
-        " 4. "
+        "  4. "
     };
 
     int x = menuSelections[1].length();
@@ -91,10 +91,10 @@ void ConsoleHandler::showBoardSizeMenu() {
     setConsoleColor(WHITE, BLACK);
 
     const std::string sizeMenus[] = {
-        "  SIZE     SELECT",
-        "15      *      15",
-        "19      *      19",
-        "뒤   로   가   기"
+        " SELECT     SIZE ",
+        "15      ×     15",
+        "19      ×     19",
+        "  GO       BACK  "
     };
 
     const std::string menuSelections[] = {
