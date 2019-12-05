@@ -32,7 +32,7 @@ void ConsoleHandler::setPredefinedConsoleSize() {
 
 void ConsoleHandler::showRuleMenu() {
     // 콘솔창 설정
-    system("title 오목 게임");// 콘솔창 이름 설정
+    system("title OMOK GAME");// 콘솔창 이름 설정
     setPredefinedConsoleSize();
     hideCursorOnConsole();
     setConsoleColor(WHITE, BLACK);
@@ -85,7 +85,7 @@ int ConsoleHandler::getRuleMenuInput() {
 
 void ConsoleHandler::showBoardSizeMenu() {
     // 콘솔창 설정
-    system("title 오목 게임");// 콘솔창 이름 설정
+    system("title OMOK GAME");// 콘솔창 이름 설정
     setPredefinedConsoleSize();
     hideCursorOnConsole();
     setConsoleColor(WHITE, BLACK);

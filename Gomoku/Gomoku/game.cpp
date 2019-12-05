@@ -11,7 +11,6 @@ Game::Game(int size) {
     exitGame = false;
 
     // 콘솔창 설정
-    system("title 오목 게임");              // 콘솔창 이름 설정
     ConsoleHandler::setPredefinedConsoleSize();
     ConsoleHandler::hideCursorOnConsole();  // 콘솔 커서 깜빡임 제거
 

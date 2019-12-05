@@ -1,7 +1,15 @@
 #include "normal_game.h"
 #include <Windows.h>
 
-NormalGame::NormalGame(int size) : Game(size) { }
+NormalGame::NormalGame(int size) : Game(size) {
+    // 콘솔창 이름 설정
+    if (size == 15) {
+        system("title OMOK GAME - Normal Rule (15 ×15)");
+    }
+    else {
+        system("title OMOK GAME - Normal Rule (19 ×19)");
+    }
+}
 
 bool NormalGame::isPlaceable(int x, int y) {
     if (isExist(x, y)) {

@@ -1,7 +1,15 @@
 #include "renju_game.h"
 #include <Windows.h>
 
-RenjuGame::RenjuGame(int size) : Game(size) { }
+RenjuGame::RenjuGame(int size) : Game(size) {
+    // 콘솔창 이름 설정
+    if (size == 15) {
+        system("title OMOK GAME - Renju Rule (15 ×15)");
+    }
+    else {
+        system("title OMOK GAME - Renju Rule (19 ×19)");
+    }
+}
 
 bool RenjuGame::isPlaceable(int x, int y) {
     if (isExist(x, y)) {
