@@ -149,14 +149,10 @@ void Game::update() {
                 // 승자가 누구인지 결정되면 사용하기 위해 현재 턴이 누군지 저장
                 Symbols winner = EMPTY;
 
-
                 // 착수 가능 여부 확인 후, 선택된 좌표에 턴에 따라 흑/백돌 착수
                 if (isPlaceable(selectedBoardX, selectedBoardY)) {
                     // 지금 둘 수로 게임에서 이겼는지 확인
-                    if (isFive(selectedBoardX, selectedBoardY)) {
-                        // 승자가 결정된 경우
-                        winner = turn;
-                    }
+                    winner = getWinner();
 
                     // 착수
                     placeStone(selectedBoardX, selectedBoardY);
@@ -210,6 +206,13 @@ void Game::render() {
 
 Symbols Game::getTurn() {
     return this->turn;
+}
+
+int Game::getSelectedBoardX() {
+    return this->selectedBoardX;
+}
+int Game::getSelectedBoardY() {
+    return this->selectedBoardY;
 }
 
 void Game::placeStone(int x, int y) {
@@ -273,6 +276,16 @@ int Game::redoStone() {
     turnNumber++;
 
     return 0; // 성공적으로 턴을 복구함
+}
+
+Symbols Game::getWinner() {
+    if (isFive(selectedBoardX, selectedBoardY)) {
+        // 승자가 결정된 경우
+        return turn;
+    }
+    else {
+        return Symbols::EMPTY;
+    }
 }
 
 

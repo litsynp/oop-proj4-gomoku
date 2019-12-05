@@ -60,6 +60,10 @@ public:
     // getter for turn member variable
     Symbols getTurn();
 
+    // getters for selectedBoardX and Y
+    int getSelectedBoardX();
+    int getSelectedBoardY();
+
     /*************************************
      *              착수 관련
      *************************************/
@@ -78,6 +82,9 @@ public:
 
     // 사용자가 R을 눌렀을 때 실행되는 Redo 기능 (0: 성공, 1: 실패)
     int redoStone();
+
+    // 현재 턴에서 둔 수로 이겼는지 체크
+    virtual Symbols getWinner();
 
     /*************************************
      *     Keyboard Input Handling 관련

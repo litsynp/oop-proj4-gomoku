@@ -9,6 +9,7 @@ private:
 public:
     RenjuGame(int size);
     virtual bool isPlaceable(int x, int y);
+    virtual Symbols getWinner();
 };
 
 #endif

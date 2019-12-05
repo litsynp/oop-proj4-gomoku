@@ -36,3 +36,20 @@ bool RenjuGame::isPlaceable(int x, int y) {
     }
     return true;
 }
+
+Symbols RenjuGame::getWinner() {
+    Symbols curTurn = getTurn();
+    int boardX = getSelectedBoardX();
+    int boardY = getSelectedBoardY();
+
+    // 흑백 상관없이 5가 완성되거나, 백돌일 경우 장목을 허용
+    if (isFive(boardX, boardY) 
+        || (curTurn == WHITE_STONE && isSix(boardX, boardY))) {
+        // 승자가 결정된 경우
+        return curTurn;
+    }
+    else {
+        // 승패가 결정되지 않은 경우
+        return Symbols::EMPTY;
+    }
+}
