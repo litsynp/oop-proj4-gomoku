@@ -207,9 +207,6 @@ void Game::update() {
 void Game::render() {
     // 화면 출력
     printBoard();
-
-    // 커서 출력
-    ConsoleHandler::displayCursor(cursorX, cursorY);
 }
 
 Symbols Game::getTurn() {
