@@ -122,7 +122,6 @@ public:
 
     bool isOpenThree(int x, int y, int nDir);           // 양쪽으로 열린 3의 경우
     bool isDoubleThree(int x, int y);                   // 금수인 3-3을 확인
-    bool isForbidden(int x, int y) { return false; };   // 모든 금수 조건을 검사
 };
 
 #endif
