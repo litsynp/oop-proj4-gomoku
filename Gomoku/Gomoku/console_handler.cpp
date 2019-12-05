@@ -27,7 +27,7 @@ const std::string turnMsg[] = {
 };
 
 void ConsoleHandler::setPredefinedConsoleSize() {
-    system("mode con: cols=58 lines=32"); // 콘솔 크기 설정
+    system("mode con: cols=56 lines=32"); // 콘솔 크기 설정
 }
 
 void ConsoleHandler::showRuleMenu() {
@@ -46,15 +46,15 @@ void ConsoleHandler::showRuleMenu() {
     };
 
     const std::string menuSelections[] = {
-        "    ",
-        "                         ",
-        "  1. ",
-        "                         ",
-        "  2. ",
-        "                         ",
-        "  3. ",
-        "                         ",
-        "  4. "
+        "   ",
+        "                        ",
+        " 1. ",
+        "                        ",
+        " 2. ",
+        "                        ",
+        " 3. ",
+        "                        ",
+        " 4. "
     };
 
     int x = menuSelections[1].length();
@@ -98,13 +98,13 @@ void ConsoleHandler::showBoardSizeMenu() {
     };
 
     const std::string menuSelections[] = {
-        "    ",
+        "   ",
         "                         ",
-        "  1. ",
+        " 1. ",
         "                         ",
-        "  2. ",
+        " 2. ",
         "                         ",
-        "  3. "
+        " 3. "
     };
 
     int x = menuSelections[1].length();
