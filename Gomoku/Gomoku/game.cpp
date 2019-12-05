@@ -160,12 +160,12 @@ void Game::update() {
                     // 승자가 존재한다면 마지막 오목판 상태 출력, 메세지박스 출력 및 게임 종료
                     if (winner == BLACK_STONE) {
                         printBoard();
-                        MessageBox(NULL, "오목 완성 - 흑돌의 승리입니다.", "BLACK STONE WINS!", MB_OK);
+                        MessageBox(NULL, "OMOK! - Black stone wins!", "BLACK STONE WINS!", MB_OK);
                         exitGame = true;
                     }
                     else if (winner == WHITE_STONE) {
                         printBoard();
-                        MessageBox(NULL, "오목 완성 - 백돌의 승리입니다.", "WHITE STONE WINS!", MB_OK);
+                        MessageBox(NULL, "OMOK! - White stone wins!", "WHITE STONE WINS!", MB_OK);
                         exitGame = true;
                     }
 
@@ -192,6 +192,18 @@ void Game::update() {
             }
             else if (keyInput == Keys::DEL) {
                 // DELETE를 눌렀을 경우 착수하지 않고 현재 턴을 종료
+                if (turn == Symbols::BLACK_STONE) {
+                    blackSkipped = true;
+                }
+                else {
+                    whiteSkipped = true;
+                }
+                // 둘 다 스킵했으면 무승부
+                if (blackSkipped && whiteSkipped) {
+                    MessageBox(NULL, "DRAW - Both players skipped their turns.", "DRAW!", MB_OK);
+                    exitGame = true;
+                }
+
                 turn = (turn == Symbols::BLACK_STONE ? Symbols::WHITE_STONE : Symbols::BLACK_STONE);
                 break;
             }
@@ -217,6 +229,12 @@ int Game::getSelectedBoardY() {
 
 void Game::placeStone(int x, int y) {
     board[y][x] = turn;
+    if (turn == Symbols::BLACK_STONE) {
+        blackSkipped = false;
+    }
+    else {
+        whiteSkipped = false;
+    }
 
     // 현재 턴 넘버와 같거나 큰 넘버를 가진, 다른 분기의 수를 전부 삭제
     if (!turns.empty() && (turns.size() >= turnNumber)) {

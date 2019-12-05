@@ -44,6 +44,10 @@ private:
     int selectedBoardX;
     int selectedBoardY;
 
+    // 턴을 스킵했는지 저장 (두 명이 차례대로 턴을 스킵했다면 무승부)
+    bool whiteSkipped = false;
+    bool blackSkipped = false;
+
 public:
     // 게임 기본 세팅
     Game(int size);
