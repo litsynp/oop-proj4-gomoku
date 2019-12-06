@@ -178,7 +178,7 @@ void ConsoleHandler::displayShortcuts(int size) {
 }
 
 void ConsoleHandler::displayRemainingTime(clock_t time) {
-    ConsoleHandler::setConsoleColor(RED, BLACK);
+    ConsoleHandler::setConsoleColor(WHITE, BLACK);
     int sec = ((clock() - (int)time) / 1000) % 60;
     int timeLimitInSec = TIME_LIMIT / 1000;
     printf("%02d", 30 - sec);

@@ -72,9 +72,6 @@ public:
 
     // 콘솔 내 커서 위치 이동
     static void gotoxy(int x, int y);
-
-    // 팝업 메세지 표시
-    static void showPopupMessage(std::string str);
 };
 
 #endif
