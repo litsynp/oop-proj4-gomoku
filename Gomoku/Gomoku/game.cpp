@@ -92,10 +92,10 @@ void Game::update() {
 
             // 메세지박스 출력
             if (turn == BLACK_STONE) {
-                MessageBox(NULL, "Time Over - 백돌의 승리입니다.", "WHITE STONE WINS!", MB_OK);
+                MessageBox(NULL, "Time Over - White stone wins.", "WHITE STONE WINS!", MB_OK);
             }
             else {
-                MessageBox(NULL, "Time Over - 흑돌의 승리입니다.", "BLACK STONE WINS!", MB_OK);
+                MessageBox(NULL, "Time Over - Black stone wins.", "BLACK STONE WINS!", MB_OK);
             }
             // 게임 종료
             exitGame = true;
